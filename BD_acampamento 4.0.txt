@@ -1,0 +1,52 @@
+create database church_sys;
+
+use church_sys
+
+create table acampante (
+id int not null primary key auto_increment,
+nome varchar(300) not null,
+idade int not null,
+contato varchar(17) not null,
+rg varchar(20) not null,
+alergia varchar(100),
+saldo double not null);
+
+create table compra(
+id int not null primary key auto_increment,
+hora datetime default current_timestamp,
+valor double not null,
+saldo_inicial double not null,
+saldo_final double not null,
+id_acamp int not null,
+lider_caixa varchar(80) not null,
+descricao text,
+foreign key(id_acamp) references acampante(id));
+
+create table deposito(
+id int not null primary key auto_increment,
+hora datetime default current_timestamp,
+valor double not null,
+saldo_inicial double not null,
+saldo_final double not null,
+id_acamp int not null,
+lider_caixa varchar(80) not null,
+foreign key(id_acamp) references acampante(id));
+
+create table produto(
+id int not null primary key auto_increment,
+nome varchar(50) not null,
+valor double not null,
+quantidade int not null);
+
+create table alteracoesValor(
+id int not null primary key auto_increment,
+hora datetime default current_timestamp,
+valor_inicial double not null,
+valor_final double not null,
+id_acamp int not null,
+lider_caixa varchar(80) not null,
+foreign key(id_acamp) references acampante(id));
+
+create table lideranca(
+id int not null primary key auto_increment,
+nome varchar(50) not null);
